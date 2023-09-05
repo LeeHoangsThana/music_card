@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/CSS/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/Icon/all.min.css"
+    />
+    <link rel="website icon" href="assets/Images/Thuy-4.jpg">
+    <style>
+      :root{
+  --rainbow: linear-gradient(to bottom right,#acdaf1, #265fb5, #6e4588, #d44e4e);
+  --background-color-wrapper: #5f7a61;
+  --color-wrapper: #d5eebb;
+  --color-seek-bar: #7fc8a9;
+  --background-color-wrapper: #d14d72;
+  --color-wrapper: #fa9d9d;
+  --color-seek-bar: #fcc8d1;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+.wrapper{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--rainbow);
+  font-family: 'Roboto', sans-serif;
+}
+.card-music{
+  width: 350px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.music-player{
+  border-radius: 20px;
+  padding: 30px;
+  color: var(--color-wrapper);
+  background: no-repeat;
+  background-size: cover;
+  animation: pulse-light 2s ease infinite alternate;
+  position: absolute;
+}
+@keyframes pulse-light {
+  0%{
+    box-shadow: 0px 0px 100px 20px rgba(255, 255, 255, 0.505);
+  }
+  100%{
+    box-shadow: 0px 0px 100px 10px rgba(255, 255, 255, 0.505);
+  }
+  
+}
+.music-name, .artist-name{
+  text-align: center;
+  text-transform: capitalize;
+}
+.music-name{
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  word-wrap: none;
+}
+.artist-name{
+  font-size: 20px;
+}
+.disk{
+  position: relative;
+  display: block;
+  margin: 30px auto;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: #fff no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 0 15px rgba(255, 255, 255, 0.2);
+  animation: rotate 60s linear infinite;
+  animation-play-state: paused;
+}
+.disk.play{
+  animation-play-state: running;
+}
+/* .disk::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--background-color-wrapper);
+} */
+.song-slider{
+  width: 100%;
+  position: relative;
+}
+.seek-bar{
+  appearance: none;
+  -ms-progress-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--color-seek-bar);
+  cursor: pointer;
+}
+.seek-bar::-webkit-slider-thumb{
+  appearance: none;
+  -ms-progress-appearance: none;
+  width: 1px;
+  height: 20px;
+  box-shadow: -400px 0 0 400px var(--color-wrapper);
+}
+.current-time, .song-duration{
+  font-size: 14px;
+}
+.time{
+  display: flex;
+  justify-content: space-between;
+}
+.controls{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  margin-top: 20px;
+}
+.play-btn{
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--color-wrapper);
+  cursor: pointer;
+  border: none;
+}
+.play-btn span{
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: var(--background-color-wrapper);
+  transition: 0.5s;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+.play-btn span:nth-child(2){
+  left: 60%;
+  transform-origin: center;
+  -o-transform-origin: center;
+  -ms-transform-origin: center;
+  -moz-transform-origin: center;
+  -webkit-transform-origin: center;
+}
+.play-btn.pause span:nth-child(2){
+  transform: translateY(-50%) scaleY(0);
+}
+.play-btn.pause span:nth-child(1){
+  width: 35%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  border-radius: 0;
+  clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 100%);
+}
+.play-btn.pause{
+  animation: pulse 1s linear infinite alternate;
+}
+@keyframes pulse {
+  to{
+    box-shadow: 0;
+  }
+  from{
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.4);
+  }
+}
+.btn{
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-wrapper);
+  color: var(--background-color-wrapper);
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+@keyframes rotate {
+  to{
+    transform: rotate(360deg);
+  }
+  from{
+    transform: rotate(0deg);
+  }
+}
+    </style>
+
+    <title>Dành tặng cho cục dàngggg</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- audio -->
+      <audio src="" id="audio" loop="true"></audio>
+
+      <div class="card-music">
+
+        <div class="music-player">
+          <h1 class="music-name">song one</h1>
+  
+          <p class="artist-name">artist</p>
+  
+          <div class="disk"></div>
+  
+          <div class="song-slider">
+            <input type="range" value="0" class="seek-bar" />
+          </div>
+  
+          <div class="time">
+            <span class="current-time">00:00</span>
+            <span class="song-duration">00:00</span>
+          </div>
+  
+          <div class="controls">
+            <button class="btn backward-btn">
+              <i class="fa-solid fa-backward"></i>
+            </button>
+  
+            <button class="play-btn pause">
+              <span></span>
+              <span></span>
+            </button>
+  
+            <button class="btn forward-btn">
+              <i class="fa-solid fa-forward"></i>
+            </button>
+          </div>
+        </div>
+  
+      </div>
+
+      <script>
+        let songs = [
+      {
+          name: 'Yêu Một Người Vô Tâm',
+          path: '/assets/Audio/Download-_1_.mp3',
+          artist: 'Mr.Siro',
+          cover: 'assets/Images/Thuy-2.jpg'
+      },
+      // {
+      //     name: 'song 2',
+      //     path: 'assets/Audio/Download.mp3',
+      //     artist: 'artist',
+      //     cover: 'assets/Images/Thuy-1.jpg'
+      // },
+  ];
+  
+  let currentMusic = 0;
+  
+  const music = document.querySelector('#audio');
+  
+  const seekBar = document.querySelector('.seek-bar');
+  const songName = document.querySelector('.music-name');
+  const artistName = document.querySelector('.artist-name');
+  const disk = document.querySelector('.disk');
+  const currentTime = document.querySelector('.current-time');
+  const musicDuration = document.querySelector('.song-duration');
+  const playBtn = document.querySelector('.play-btn');
+  const forwardBtn = document.querySelector('.forward-btn');
+  const backwardBtn = document.querySelector('.backward-btn');
+  const backgroundImageMusicPlayer = document.querySelector('.music-player')
+  
+  playBtn.addEventListener('click', () => {
+      if(playBtn.className.includes('pause')){
+          music.play();
+      }
+      else{
+          music.pause();
+      } 
+      playBtn.classList.toggle('pause');
+      disk.classList.toggle('play');
+  })
+  //setup music
+  const setMusic = (i) => {
+      seekBar.value = 0; //set range slide value to 0
+      let song = songs[i];
+      currentMusic = i;
+      music.src = song.path;
+      
+      songName.innerHTML = song.name;
+      artistName.innerHTML = song.artist;
+      disk.style.backgroundImage = `url('${song.cover}')`;
+      backgroundImageMusicPlayer.style.backgroundImage = ` linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url('${song.cover}')`;
+  
+      currentTime.innerHTML = '00:00';
+      setTimeout(() => {
+          seekBar.max = music.duration;
+          musicDuration.innerHTML = formatTime(music.duration);
+  
+      }, 300)
+  
+  }
+  
+  setMusic(0);
+  
+  //formating time in min and  seconds format
+  const formatTime = (time) => {
+      let min = Math.floor(time / 60);
+      if (min < 10){
+          min = `0${min}`;
+      }
+      let sec =  Math.floor(time % 60);
+      if (sec < 10){
+          sec = `0${sec}`;
+      }
+      return `${min}:${sec}`;
+  }
+  //seek bar
+  setInterval(() => {
+      seekBar.value = music.currentTime;
+      currentTime.innerHTML = formatTime(music.currentTime);
+  }, 500)
+  
+  seekBar.addEventListener('change', () => {
+      music.currentTime = seekBar.value;
+  })
+  
+  //forward and backward button
+  forwardBtn.addEventListener('click', () => {
+      if(currentMusic >= songs.length - 1){
+          currentMusic = 0;
+      }else{
+          currentMusic++;
+      }
+      setMusic(currentMusic);
+      playBtn.click();
+  })
+  backwardBtn.addEventListener('click', () => {
+      if(currentMusic <= 0){
+          currentMusic = songs.length - 1;
+      }else{
+          currentMusic--;
+      }
+      setMusic(currentMusic);
+      playBtn.click();
+  })
+      </script>
+  
+      <script src="/assets/JS/script.js"></script>
+
+    </div>
+  </body>
+</html>

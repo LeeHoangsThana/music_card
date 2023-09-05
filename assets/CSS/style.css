@@ -1,0 +1,198 @@
+:root{
+  --rainbow: linear-gradient(to bottom right,#acdaf1, #265fb5, #6e4588, #d44e4e);
+  --background-color-wrapper: #5f7a61;
+  --color-wrapper: #d5eebb;
+  --color-seek-bar: #7fc8a9;
+  --background-color-wrapper: #d14d72;
+  --color-wrapper: #fa9d9d;
+  --color-seek-bar: #fcc8d1;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+.wrapper{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--rainbow);
+  font-family: 'Roboto', sans-serif;
+}
+.card-music{
+  width: 350px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.music-player{
+  border-radius: 20px;
+  padding: 30px;
+  color: var(--color-wrapper);
+  background: no-repeat;
+  background-size: cover;
+  animation: pulse-light 2s ease infinite alternate;
+  position: absolute;
+}
+@keyframes pulse-light {
+  0%{
+    box-shadow: 0px 0px 100px 20px rgba(255, 255, 255, 0.505);
+  }
+  100%{
+    box-shadow: 0px 0px 100px 10px rgba(255, 255, 255, 0.505);
+  }
+  
+}
+.music-name, .artist-name{
+  text-align: center;
+  text-transform: capitalize;
+}
+.music-name{
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  word-wrap: none;
+}
+.artist-name{
+  font-size: 20px;
+}
+.disk{
+  position: relative;
+  display: block;
+  margin: 30px auto;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: #fff no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 0 15px rgba(255, 255, 255, 0.2);
+  animation: rotate 60s linear infinite;
+  animation-play-state: paused;
+}
+.disk.play{
+  animation-play-state: running;
+}
+/* .disk::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--background-color-wrapper);
+} */
+.song-slider{
+  width: 100%;
+  position: relative;
+}
+.seek-bar{
+  appearance: none;
+  -ms-progress-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--color-seek-bar);
+  cursor: pointer;
+}
+.seek-bar::-webkit-slider-thumb{
+  appearance: none;
+  -ms-progress-appearance: none;
+  width: 1px;
+  height: 20px;
+  box-shadow: -400px 0 0 400px var(--color-wrapper);
+}
+.current-time, .song-duration{
+  font-size: 14px;
+}
+.time{
+  display: flex;
+  justify-content: space-between;
+}
+.controls{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  margin-top: 20px;
+}
+.play-btn{
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--color-wrapper);
+  cursor: pointer;
+  border: none;
+}
+.play-btn span{
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 30px;
+  border-radius: 2px;
+  background-color: var(--background-color-wrapper);
+  transition: 0.5s;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+.play-btn span:nth-child(2){
+  left: 60%;
+  transform-origin: center;
+  -o-transform-origin: center;
+  -ms-transform-origin: center;
+  -moz-transform-origin: center;
+  -webkit-transform-origin: center;
+}
+.play-btn.pause span:nth-child(2){
+  transform: translateY(-50%) scaleY(0);
+}
+.play-btn.pause span:nth-child(1){
+  width: 35%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  border-radius: 0;
+  clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 100%);
+}
+.play-btn.pause{
+  animation: pulse 1s linear infinite alternate;
+}
+@keyframes pulse {
+  to{
+    box-shadow: 0;
+  }
+  from{
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.4);
+  }
+}
+.btn{
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-wrapper);
+  color: var(--background-color-wrapper);
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+@keyframes rotate {
+  to{
+    transform: rotate(360deg);
+  }
+  from{
+    transform: rotate(0deg);
+  }
+}
